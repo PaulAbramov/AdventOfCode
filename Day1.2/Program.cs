@@ -1,11 +1,19 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿/*
+ * https://adventofcode.com/2022/day/1
+ *
+ * By the time you calculate the answer to the Elves' question,
+ * they've already realized that the Elf carrying the most Calories of food might eventually run out of snacks.
+ *
+ * To avoid this unacceptable situation,
+ * the Elves would instead like to know the total Calories carried by the top three Elves carrying the most Calories.
+ * That way, even if one of those Elves runs out of snacks, they still have two backups.
+ *
+ * Find the top three Elves carrying the most Calories.
+ * How many Calories are those Elves carrying in total?
+ */
 
 // Create a comparer that sorts the items in descending order
-
 IComparer<int> descendingComparer = Comparer<int>.Create((x, y) => y - x);
-
-// Create a SortedSet<T> collection with a maximum capacity of 3
-// and use the custom comparer to sort the items in descending order
 var sortedSet = new SortedSet<int>(descendingComparer);
 
 const int topElvesCount = 3;

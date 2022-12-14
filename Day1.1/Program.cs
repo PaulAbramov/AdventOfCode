@@ -1,4 +1,14 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿/*
+ * https://adventofcode.com/2022/day/1
+ *
+ * One important consideration is food - in particular, the number of Calories each Elf is carrying (your puzzle input).
+ * This list represents the Calories of the food carried by all Elves
+ *
+ * In case the Elves get hungry and need extra snacks, they need to know which Elf to ask:
+ * they'd like to know how many Calories are being carried by the Elf carrying the most Calories.
+ *
+ * Find the Elf carrying the most Calories. How many total Calories is that Elf carrying?
+ */
 
 Tuple<int, long>? biggestAmountOfCalories = null;
 int counter = 0;
@@ -13,13 +23,13 @@ foreach (var line in File.ReadLines("input.txt"))
         {
             biggestAmountOfCalories = new Tuple<int, long>(counter, currentElvCalories);
         }
-        
+
         counter++;
         currentElvCalories = 0;
-        
+
         continue;
     }
-    
+
     currentElvCalories += long.Parse(line);
 }
 
