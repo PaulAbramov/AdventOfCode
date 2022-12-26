@@ -1,4 +1,4 @@
-﻿namespace Day7_1;
+﻿namespace Day7_2;
 
 public class DirectoryManager
 {
@@ -82,5 +82,39 @@ public class DirectoryManager
         size += folder.Folders.Sum(subfolder => GetFolderSizeWithThreshold(subfolder));
 
         return size;
+    }
+
+    public Folder GetSmallestFolderToFreeUpEnoughSpace(long maxSize = 70_000_000, long neededSpace = 30_000_000)
+    {
+        var spaceToFreeUp = rootFolder.Size - (maxSize - neededSpace);
+
+        return GetFolderInThreshold(rootFolder, spaceToFreeUp)!;
+    }
+
+    private Folder? GetFolderInThreshold(Folder folder, long spaceToFreeUp)
+    {
+        Folder? retValue = null;
+        if (folder.Size >= spaceToFreeUp)
+        {
+            retValue = folder;
+        }
+
+        foreach (var subfolder in folder.Folders)
+        {
+            var validSubFolder = GetFolderInThreshold(subfolder, spaceToFreeUp);
+
+            if (validSubFolder == null 
+                    || validSubFolder.Size >= folder.Size)
+            {
+                continue;
+            }
+
+            if (retValue.Size >= validSubFolder.Size)
+            {
+                retValue = validSubFolder;
+            }
+        }
+
+        return retValue;
     }
 }
